@@ -15,7 +15,7 @@ int main (void)
   double r = 0, r_expected = sqrt (5.0);
   double x_lo = 0.0, x_hi = 5.0;
   gsl_function F;
-  struct quadratic_params params = {1.0, 0.0, -4.0};
+  struct quadratic_params params = {1.0, 0.0, -5.0};
 
   F.function = &quadratic;
   F.params = &params;

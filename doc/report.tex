@@ -1,0 +1,56 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+
+\usepackage{subfigure}
+
+\usepackage{amsmath}
+
+\usepackage{amsthm}
+\newtheorem{property}{性质}
+
+\usepackage{amssymb}
+
+\usepackage{ulem}
+
+\usepackage{url}
+
+\usepackage{hyperref}
+\hypersetup{hidelinks,
+			colorlinks=true,
+			allcolors=blue,
+			pdfstartview=Fit,
+			breaklinks=true}
+
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm}
+
+\title{GNU Scientific Library的安装及roots.c的功能}
+
+\author{赵天健 \\ 信息与计算科学\quad 3210101830}
+
+\begin{document}
+
+\maketitle
+
+\section{安装}
+我用\verb!brew install gsl!直接安装了最新的\verb!2.7.1!版本的GSL, 可以在\verb!log/ChangeLog.log!中查看我安装的GSL的\verb!ChangeLog!文件.
+
+\section{roots.c}
+运行\verb!roots.c!文件, 会产生如下结果:
+\begin{verbatim}
+$ ./bin/roots
+using brent method
+ iter [    lower,     upper]      root        err  err(est)
+    1 [1.0000000, 5.0000000] 1.0000000 -1.2360680 4.0000000
+    2 [1.0000000, 3.0000000] 3.0000000 +0.7639320 2.0000000
+    3 [2.0000000, 3.0000000] 2.0000000 -0.2360680 1.0000000
+    4 [2.2000000, 3.0000000] 2.2000000 -0.0360680 0.8000000
+    5 [2.2000000, 2.2366300] 2.2366300 +0.0005621 0.0366300
+Converged:
+    6 [2.2360634, 2.2366300] 2.2360634 -0.0000046 0.0005666
+\end{verbatim}
+\par \verb!roots.c!是一个求二次函数的根的程序, 可以通过\verb!gsl_roots.h!库中规定的一些迭代方法, 如Brent法, 二分法, Newton法( 需要额外给出函数的导函数 )等, 来求解二次函数$f(x)=x^2-5$在$(0, 5)$上的根, \verb!root!表示求得的近似根, \verb![lower, upper]!表示根落在的区间, \verb!err!表示实际误差, \verb!err(est)!表示最大可能误差( 即前述区间的长度 ). 若需要求解其它函数, 由一点数学可得需要找到使得函数取值符号相反的两点, 然后在此区间内使用GSL中的迭代方法即可求解.
+
+
+\end{document}
